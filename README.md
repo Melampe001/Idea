@@ -114,7 +114,53 @@ Paso 9: Mantenimiento
 Cada 4 meses: Actualiza Remote Config con nuevos colores/tipografías (e.g., Google Fonts), lógica mejorada (e.g., IA para predicciones).
 Invitaciones: Usa Firebase Messaging para push notifications a emails registrados.
 Si necesitas código específico o ayuda con errores, comparte detalles. ¡Éxito con tu repo! Una vez subido, comparte el link para feedback.
+Navegación en el panel de ayuda
+Mercado
+Documentación
+Logotipo de la CLI para desarrolladores de Azure
+CLI para desarrolladores de Azure
+Por Azure
+Instala la CLI de desarrollador de Azure junto con las dependencias necesarias.
 
+Para obtener información adicional, consulte la documentación de esta función .
+
+Instalación
+Copie y pegue el siguiente fragmento en el atributo de características de su archivo devcontainer.json .
+
+"ghcr.io/azure/azure-dev/azd:0": {}
+Opciones
+Las opciones permiten modificar la función seleccionada. Si se omite una opción, se volverá al valor predeterminado designado por la función.
+
+Las opciones con un ...representan propuestas y aceptarán un valor distinto a los enumerados.
+
+versión
+Saltar al contenido
+Menú de navegación
+Melampe001
+Idea
+
+Código
+Asuntos
+Solicitudes de extracción
+Idea/ .devcontainer
+/
+devcontainer.json
+en
+principal
+
+Editar
+
+Avance
+Cargando vista previa…
+1
+2
+3
+4
+{
+  "imagen":"mcr.microsoft.com/devcontainers/universal:2",
+  "características": {}
+}
+Nuevo archivo en / · Melampe001/Idea
 
 
 
