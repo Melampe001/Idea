@@ -3,12 +3,22 @@ name: Flutter Build (Android)
 on:
   push:
     branches: [ main ]
+    paths:
+      - 'pubspec.yaml'
+      - 'lib/**'
+      - 'android/**'
   pull_request:
     branches: [ main ]
+    paths:
+      - 'pubspec.yaml'
+      - 'lib/**'
+      - 'android/**'
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    # Only run if Flutter project files exist
+    if: hashFiles('pubspec.yaml') != ''
 
     steps:
       - name: Checkout repository
@@ -17,7 +27,7 @@ jobs:
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.24.0' # usa la versión que tengas en tu pubspec.yaml
+          flutter-version: '3.24.0'
 
       - name: Get Flutter dependencies
         run: flutter pub get
