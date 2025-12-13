@@ -39,28 +39,16 @@ describe('Tokyo Predictor Backend Server', () => {
     mockTokioAI.results = [];
   });
 
-  afterAll((done) => {
-    // Close WebSocket server
+  afterAll(async () => {
+    // Close WebSocket clients and server
     if (wss && wss.clients) {
-      wss.clients.forEach(client => {
-        client.close();
-      });
-      wss.close(() => {
-        // Close HTTP server
-        if (server && server.listening) {
-          server.close(() => {
-            done();
-          });
-        } else {
-          done();
-        }
-      });
-    } else if (server && server.listening) {
-      server.close(() => {
-        done();
-      });
-    } else {
-      done();
+      wss.clients.forEach(client => client.close());
+      await new Promise(resolve => wss.close(resolve));
+    }
+    
+    // Close HTTP server
+    if (server && server.listening) {
+      await new Promise(resolve => server.close(resolve));
     }
   });
 
