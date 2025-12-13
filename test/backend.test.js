@@ -9,6 +9,9 @@
 import request from 'supertest';
 import { jest } from '@jest/globals';
 
+// Set test environment
+process.env.NODE_ENV = 'test';
+
 // Mock the TokioAI adapter before importing the server
 const mockTokioAI = {
   captureResult: jest.fn(),
@@ -26,7 +29,7 @@ jest.unstable_mockModule('../src/tokioai-adapter.js', () => ({
 }));
 
 // Import server after mocking
-const { default: app } = await import('../server.js');
+const { default: app, server, wss } = await import('../server.js');
 
 describe('Tokyo Predictor Backend Server', () => {
   
@@ -34,6 +37,19 @@ describe('Tokyo Predictor Backend Server', () => {
     // Reset all mocks before each test
     jest.clearAllMocks();
     mockTokioAI.results = [];
+  });
+
+  afterAll(async () => {
+    // Close WebSocket clients and server
+    if (wss && wss.clients) {
+      wss.clients.forEach(client => client.close());
+      await new Promise(resolve => wss.close(resolve));
+    }
+    
+    // Close HTTP server
+    if (server && server.listening) {
+      await new Promise(resolve => server.close(resolve));
+    }
   });
 
   describe('Health Check Endpoint', () => {
