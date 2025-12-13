@@ -3,16 +3,8 @@ name: Flutter Build (Android)
 on:
   push:
     branches: [ main ]
-    paths:
-      - 'pubspec.yaml'
-      - 'lib/**'
-      - 'android/**'
   pull_request:
     branches: [ main ]
-    paths:
-      - 'pubspec.yaml'
-      - 'lib/**'
-      - 'android/**'
 
 jobs:
   build:
