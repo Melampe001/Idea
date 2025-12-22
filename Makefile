@@ -1,5 +1,5 @@
 .PHONY: fmt
 fmt:
 	@echo "Running formatter..."
-	@npm run lint || true
-	@echo "Format check complete"
+	@npm run lint
+	@echo "Formatting complete."
